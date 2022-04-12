@@ -47,15 +47,15 @@ The homepage will outline some group information along with a hero image of a ea
 * To provide the user with contact resources to a higher power of authority/ community based environment.
 ###  Target Market & User Stories:
 #### Target Market:
-* Any person with an interest in managing their own waste responsibly
-* Any business looking to responsibly get rid of waste and avoid penalties.
-* Anyone who has moved into a new area and wants to find out where they can recycle and dispose of their waste
+* Any salesperson with an interest in managing their own sales pipeline
+* Any manager looking to responsibly and equally manage sales people
+* Any company with an interest in accurate forecasting of sales
 
 ### User Stories:
-#### Pake Ferson
-Pake Ferson is a 28 year old who has just moved to Dublin from he countryside of Ireland. He is living in an apartment which is situated in a built up area and only give the option to put rubbish in the recycling bin or in general waste. The site is ideal for him as he is new to the area and needs to know where he can dispose of waste.
+#### Sales Person
+This user story will follow a new staff member who joins a new company that are already using the Predict Your Sales application. When this new started began, they were instructed to create an account just like the other salepeople will have done.
 
-#### Terry Oldman
+#### Manager
 Gerald is a 65 year old lady from a rural area in Dublin. Terry has lived in the area for 60+ years and is fascinated by wildlife. Terry's love for wildlife has made her grow a natural affinity for natuire preservatoin and environmentalism. Therefore Terry loves going to the site to provide more informstoin around new waste management procedures.
 
 ### UX Design Stages
