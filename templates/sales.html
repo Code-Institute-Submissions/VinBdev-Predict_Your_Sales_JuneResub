@@ -1,7 +1,6 @@
 {% extends "base.html" %}  
 {% block content %}
 
-    <h2>I'm extending the base tempate</h2>
     {% for sale in sales %} 
     {{ sale.customer_name }}<br>
     {{ sale.close_date }}<br>
