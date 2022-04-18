@@ -22,7 +22,7 @@ mongo = PyMongo(app)
 @app.route("/")
 @app.route("/get_sales")
 def get_sales():
-    sales = mongo.db.sales.find()
+    sales = list(mongo.db.sales.find())
     return render_template("sales.html", sales=sales)
 
 
