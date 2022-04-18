@@ -17,6 +17,7 @@
             <div class="collapsible-body">
                 <strong>{{ sale.sale_amount }}</strong>
                 <p>{{ sale.sale_description }}</p>
+                <p><em>by: {{ sale.created_by }}</em></p>
             </div>
         </li>
         {% endfor %} 

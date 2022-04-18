@@ -4,7 +4,8 @@
     <h3 class="light-green-text text-darken-2 center-align">Upload a new sale:</h3>
  
     <div class="row card-panel grey lighten-3">
-        <form class="col s12" method="POST" action="">
+        <form class="col s12" method="POST" action="{{ url_for('new_sales') }}">
+            <!-- Customer Name-->
         <div class="row">
             <div class="input-field col s12">
             <i class="fas fa-pencil-alt prefix light-green-text text-darken-2"> </i>
@@ -13,26 +14,26 @@
             <label for="icon_prefix">Customer Name</label>
             </div>
         </div>
+        <!-- Sales Amount -->
         <div class="row">    
             <div class="input-field col s12">
                 <i class="fas fa-align-left prefix light-green-text text-darken-2"> </i>
                  <br>
-                <form action="#">
-                    <p class="range-field">
-                      <input type="range" id="sale_amount" name="sale_amount" min="0" max="100000" />
-                    </p>
-                  </form>
-                <label for="sale_amount">Sale Amount in Euro: </label>
+                 <input id="customer_name" name="customer_name" minlength="5" maxlength="50"
+                 type="text" class="validate" required>
+                <label for="sale_amount">Sale Amount (€): </label>
             </div>
         </div>
+                <!-- Sales Decription -->
         <div class="row">    
             <div class="input-field col s12">
                 <i class="fas fa-align-left prefix light-green-text text-darken-2"> </i>
-                <textarea id="sale_description" name="sale_description" minlength="5" maxlength="50"
+                <textarea id="sale_description" name="sale_description" minlength="50" maxlength="500"
                 type="text" class="materialize-textarea validate" required></textarea>
                 <label for="sale_description">Sale Description </label>
             </div>
         </div>
+                <!-- Close Date Field -->
         <div class="row">
             <div class="input-field col s12">
             <i class="fas fa-calendar-alt prefix light-green-text text-darken-2"> </i>
@@ -41,6 +42,7 @@
             <label for="close_date">Close Date</label>
             </div>
         </div>
+                <!-- Approval Field   -->
         <div class="row">
             <div class="input-field col s12">
                 <div class="switch">
@@ -51,6 +53,14 @@
                       Needs Approval
                     </label>
                   </div>
+            </div>
+        </div>
+        <!-- Submit button -->
+        <div class="row">
+            <div class="col s12 center-align">
+                <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                    <i class="fas fa-plus-square right"> </i>
+                </button>
             </div>
         </div>
         </form>

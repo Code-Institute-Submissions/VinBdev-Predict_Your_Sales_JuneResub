@@ -96,8 +96,22 @@ def logout():
     return redirect(url_for("login"))
 
 
-@app.route("/new_sales")
+@app.route("/new_sales", methods=["GET", "POST"])
 def new_sales():
+    if request.method == "POST":
+        purchase_approval = "Yes" if request.form.get("purchase_approval") else "No"
+        sale = {
+            "customer_name": request.form.get("customer_name"),
+            "sale_amount": request.form.get("sale_amount"),
+            "sale_description": request.form.get("sale_description"),
+            "close_date": request.form.get("close_date"),
+            "purchase_approval": purchase_approval,
+            "created_by": session["user"]
+        }
+        mongo.db.sales.insert_one(sale)
+        flash("Congratulations! Sale successfully uploaded!")
+        return redirect(url_for("new_sales"))
+
     return render_template("new_sales.html")    
 
 
