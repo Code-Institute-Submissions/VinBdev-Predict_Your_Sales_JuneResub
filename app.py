@@ -115,6 +115,12 @@ def new_sales():
     return render_template("new_sales.html")    
 
 
+@app.route("edit_sale/<sale_id>", methods = ["GET", "POST"])
+def edit_sale(sale_id):
+    sale = mongo.db.sales.find_one({"_id": ObjectId(sale_id)})
+    flash("Congratulations! Sale successfully edited!")
+    return render_template("edit_sale.html", sale=sale,)
+
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
