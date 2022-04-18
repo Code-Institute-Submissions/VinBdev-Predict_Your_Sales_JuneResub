@@ -1,20 +1,44 @@
 {% extends "base.html" %}
 {% block content  %}
 
-    <h3 class="light-green-text text-darken-2 center-align">New Sales:</h3>
+    <h3 class="light-green-text text-darken-2 center-align">Upload a new sale:</h3>
  
-    <div class="row">
+    <div class="row card-panel grey lighten-3">
         <form class="col s12" method="POST" action="">
         <div class="row">
             <div class="input-field col s12">
-            <i class="fas fa-user-circle prefix light-green-text text-darken-2"> </i>
-            <input id="icon_prefix" type="text" class="validate">
-            <label for="icon_prefix">First Name</label>
+            <i class="fas fa-pencil-alt prefix light-green-text text-darken-2"> </i>
+            <input id="customer_name" name="customer_name" minlength="5" maxlength="50"
+             type="text" class="validate" required>
+            <label for="icon_prefix">Customer Name</label>
             </div>
+        </div>
+        <div class="row">    
             <div class="input-field col s12">
-            <i class="fas fa-user-circle prefix light-green-text text-darken-2"> </i>
-            <input id="icon_telephone" type="tel" class="validate">
-            <label for="icon_telephone">Telephone</label>
+                <i class="fas fa-align-left prefix light-green-text text-darken-2"> </i>
+                <textarea id="sale_description" name="sale_description" minlength="5" maxlength="50"
+                type="text" class="materialize-textarea validate" required></textarea>
+                <label for="sale_description">Sale Description </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+            <i class="fas fa-calendar-alt prefix light-green-text text-darken-2"> </i>
+            <input id="close_date" name="close_date" minlength="5" maxlength="50"
+             type="text" class="datepicker validate" required>
+            <label for="close_date">Close Date</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <div class="switch">
+                    <i class="fas fa-exclamation-circle prefix light-green-text text-darken-2"> </i>
+                    <label for="purchase_approval"> 
+                        <input type="checkbox" id="purchase_approval" name="purchase_approval">
+                        <span class="lever"></span>
+                      Needs Approval
+                    </label>
+                  </div>
             </div>
         </div>
         </form>
