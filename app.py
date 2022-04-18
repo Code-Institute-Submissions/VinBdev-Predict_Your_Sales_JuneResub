@@ -96,6 +96,11 @@ def logout():
     return redirect(url_for("login"))
 
 
+@app.route("/new_sales")
+def new_sales():
+    return render_template("new_sales.html")    
+
+
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),

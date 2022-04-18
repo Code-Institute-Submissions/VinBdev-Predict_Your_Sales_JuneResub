@@ -23,7 +23,7 @@
                     <li><a href="{{ url_for('get_sales') }}">Home</a></li>
                     {% if session.user %}
                         <li><a href="{{ url_for('dashboard', username=session['user']) }}">Sales Dashboard</a></li>
-                        <li><a href="collapsible.html">New Sales</a></li>
+                        <li><a href="{{ url_for('new_sales') }}">New Sales</a></li>
                         <li><a href="{{ url_for('logout') }}">Log Out</a></li>
                     {% else %} 
                         <li><a href="{{ url_for('login') }}">Log In</a></li>
@@ -39,7 +39,7 @@
             <li><a href="{{ url_for('get_sales') }}">Home</a></li>
             {% if session.user %}
             <li><a href="{{ url_for('dashboard', username=session['user']) }}">Sales Dashboard</a></li>
-            <li><a href="collapsible.html">New Sales</a></li>
+            <li><a href="{{ url_for('new_sales') }}">New Sales</a></li>
             <li><a href="{{ url_for('logout') }}">Log Out</a></li>
         {% else %} 
             <li><a href="{{ url_for('login') }}">Log In</a></li>
