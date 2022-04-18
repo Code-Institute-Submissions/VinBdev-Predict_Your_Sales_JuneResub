@@ -11,3 +11,12 @@
     font-size: 20px;
     font-weight: 400;
 }
+
+.btn-small{
+    margin: 5px;
+}
+
+.collapsible-header{
+    margin: 5px;
+    line-height: 42px;
+}

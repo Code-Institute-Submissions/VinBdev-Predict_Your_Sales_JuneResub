@@ -7,13 +7,21 @@
         {% for sale in sales %} 
         <li>
             <div class="collapsible-header white-text light-green darken-2 text-shadow">
-              <i class="fas fa-caret-down"></i>
+                <div class="col s3">
+                    <i class="fas fa-caret-down"></i>
+                    <a href="" class="btn-small blue accent-2">Done</a>
+                    <a href="" class="btn-small grey accent-2">Edit</a>
+                </div>
+                <div class="col s9">
+                    
+                 
               <strong>{{ sale.customer_name }}</strong>: {{ sale.close_date }}
               {% if sale.purchase_approval == "Yes" %}
                 <i class="fas fa-exclamation-circle light-green-text text-lighten-2 tooltipped"
                  data-position="right" data-tooltip="Approval Needed!"> </i>    
               {% endif %} 
-            </div>
+                </div>
+            </div>    
             <div class="collapsible-body">
                 <strong>{{ sale.sale_amount }}</strong>
                 <p>{{ sale.sale_description }}</p>
