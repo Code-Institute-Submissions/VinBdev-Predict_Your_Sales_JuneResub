@@ -16,6 +16,18 @@
         <div class="row">    
             <div class="input-field col s12">
                 <i class="fas fa-align-left prefix light-green-text text-darken-2"> </i>
+                 <br>
+                <form action="#">
+                    <p class="range-field">
+                      <input type="range" id="sale_amount" name="sale_amount" min="0" max="100000" />
+                    </p>
+                  </form>
+                <label for="sale_amount">Sale Amount in Euro: </label>
+            </div>
+        </div>
+        <div class="row">    
+            <div class="input-field col s12">
+                <i class="fas fa-align-left prefix light-green-text text-darken-2"> </i>
                 <textarea id="sale_description" name="sale_description" minlength="5" maxlength="50"
                 type="text" class="materialize-textarea validate" required></textarea>
                 <label for="sale_description">Sale Description </label>
