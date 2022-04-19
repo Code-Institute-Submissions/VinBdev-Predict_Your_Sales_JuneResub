@@ -137,6 +137,12 @@ def edit_sale(sale_id):
     return render_template("edit_sale.html", sale=sale,)
 
 
+@app.route("/delete_sale/<sale_id>")
+def delete_sale(sale_id):
+    mongo.db.sales.delete_many({"_id": ObjectId(sale_id)})
+    flash("Sale Successfully Deleted")
+    return redirect(url_for("get_sales"))
+
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
