@@ -144,6 +144,12 @@ def delete_sale(sale_id):
     return redirect(url_for("get_sales"))
 
 
+@app.route("/get_users")
+def get_users():
+    users = list(mongo.db.users.find().sort("username"))
+    return render_template("users.html", users=users)
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),

@@ -17,13 +17,16 @@
         <!-- Top navbar-->
         <nav class="nav-extended text-shadow green darken-1">
             <div class="nav-wrapper">
-                <a href="{{ url_for('get_sales') }}" class="brand-logo">Predict Your Sales <i class="fas fa-scale-balanced"></i></a>
+                <a href="{{ url_for('get_sales') }}" class="brand-logo text-wrapped">Predict Your Sales  </i></a>
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="material-icons"><i class="fas fa-bars"></i></i></a>
                 <ul class="right hide-on-med-and-down">
                     <li><a href="{{ url_for('get_sales') }}">Home</a></li>
                     {% if session.user %}
                         <li><a href="{{ url_for('dashboard', username=session['user']) }}">Sales Dashboard</a></li>
                         <li><a href="{{ url_for('new_sales') }}">New Sales</a></li>
+                        {% if session.user|lower == "admin"|lower %} 
+                        <li><a href="{{ url_for('get_users') }}">Manage Users</a></li> 
+                        {% endif %}                       
                         <li><a href="{{ url_for('logout') }}">Log Out</a></li>
                     {% else %} 
                         <li><a href="{{ url_for('login') }}">Log In</a></li>
@@ -35,16 +38,19 @@
         <!-- Mobile side navbar-->
 
         <ul class="sidenav" id="mobile-demo">
-            <li><h4 class="center-align light-green-text text-darken-4">Predict Your Sales</i>on</h4></li>
+            <li><h4 class="center-align light-green-text text-darken-4 mobile-title text-wrapped">Predict Your Sales</i>on</h4></li>
             <li><a href="{{ url_for('get_sales') }}">Home</a></li>
             {% if session.user %}
             <li><a href="{{ url_for('dashboard', username=session['user']) }}">Sales Dashboard</a></li>
             <li><a href="{{ url_for('new_sales') }}">New Sales</a></li>
+                {% if session.user|lower == "admin"|lower %} 
+                    <li><a href="{{ url_for('get_users') }}">Manage Users</a></li> 
+                {% endif %}
             <li><a href="{{ url_for('logout') }}">Log Out</a></li>
-        {% else %} 
+            {% else %} 
             <li><a href="{{ url_for('login') }}">Log In</a></li>
             <li><a href="{{ url_for('register') }}">Register</a></li>
-        {% endif %} 
+            {% endif %} 
         </ul>
     </header>
 
