@@ -150,6 +150,19 @@ def get_users():
     return render_template("users.html", users=users)
 
 
+@app.route("/new_user", methods=["GET", "POST"])
+def new_user():
+    if request.method == "POST":
+        user = {
+            "username": request.form.get("username") 
+        }
+        mongo.db.users.insert_one(user)
+        flash("New User Added")
+        return redirect(url_for('new_user'))
+
+    return render_template("new_user.html")
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),

@@ -1,6 +1,18 @@
 {% extends "base.html" %} 
 {% block content %}
 
+    <h3 class="light-green-text text-darken-2 center-align">Manage Users</h3>
+
+    <div class="row">
+        <div class="col s12 center-align">
+            <a href="{{ url_for('new_user') }}" class="btn-large light-green darken-2 text-shadow">
+                Add New User <i class="fas fa-plus-square right"></i>
+            </a>
+        </div>
+    </div>
+
+
+
     <div class="row">
         {% for user in users %} 
         <div class="col s12 m3">
