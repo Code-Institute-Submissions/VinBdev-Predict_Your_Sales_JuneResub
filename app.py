@@ -85,7 +85,10 @@ def dashboard(username):
     # grab the session user's username from db
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
-    return render_template("dashboard.html", username=username)
+
+    if session["user"]:	
+        return render_template("dashboard.html", username=username)	
+    return redirect(url_for("login"))    
 
 
 @app.route("/logout")
@@ -99,7 +102,7 @@ def logout():
 @app.route("/new_sales", methods=["GET", "POST"])
 def new_sales():
     if request.method == "POST":
-        purchase_approval = "Yes" if request.form.get("purchase_approval") else "No"
+        purchase_approval = "yes" if request.form.get("purchase_approval") else "no"
         sale = {
             "customer_name": request.form.get("customer_name"),
             "sale_amount": request.form.get("sale_amount"),
@@ -110,16 +113,29 @@ def new_sales():
         }
         mongo.db.sales.insert_one(sale)
         flash("Congratulations! Sale successfully uploaded!")
-        return redirect(url_for("new_sales"))
+        return redirect(url_for("get_sales"))
 
     return render_template("new_sales.html")    
 
 
-@app.route("edit_sale/<sale_id>", methods = ["GET", "POST"])
+@app.route("/edit_sale/<sale_id>", methods = ["GET", "POST"])
 def edit_sale(sale_id):
+    if request.method == "POST":
+        purchase_approval = "Yes" if request.form.get("purchase_approval") else "No"
+        submit = {
+            "customer_name": request.form.get("customer_name"),
+            "sale_amount": request.form.get("sale_amount"),
+            "sale_description": request.form.get("sale_description"),
+            "close_date": request.form.get("close_date"),
+            "purchase_approval": purchase_approval,
+            "created_by": session["user"]
+        }
+        mongo.db.sales.replace_one({"_id": ObjectId(sale_id)}, submit)
+        flash("Congratulations! Sale successfully edited!")
+
     sale = mongo.db.sales.find_one({"_id": ObjectId(sale_id)})
-    flash("Congratulations! Sale successfully edited!")
     return render_template("edit_sale.html", sale=sale,)
+
 
 
 if __name__ == "__main__":
