@@ -1,16 +1,51 @@
 {% extends "base.html" %}
 {% block content %} 
 
- 
+<div class="container">
   <div class="row">
     <div class="col s12 m8 offset-m2">
       <div class="card-panel ">
           <h3 class="center-align light-green-text text-darken-2">
-            {{ username }}'s   Dashboard
+            {{ username }}'s   Dashboard:
           </h3>
       </div>
     </div>
   </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col s12 m8 offset-m2">
+      <div class="card-panel ">
+           
+          <p>{{ username }}'s  Total Sales:</p>
+          <p>{{ username }}'s  Total Revenue:</p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12 m8 offset-m2">
+      <div class="card-panel ">
+          <h3 class="center-align light-green-text text-darken-2">
+            {{ username }}'s  Total Revenue:
+          </h3>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12 m8 offset-m2">
+      <div class="card-panel ">
+          <h3 class="center-align light-green-text text-darken-2">
+            {{ username }}'s  Total Off Target:
+          </h3>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+
+   
 
    
 {% endblock %} }
