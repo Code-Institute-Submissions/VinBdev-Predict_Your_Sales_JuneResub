@@ -38,7 +38,7 @@
         <!-- Mobile side navbar-->
 
         <ul class="sidenav" id="mobile-demo">
-            <li><h4 class="center-align light-green-text text-darken-4 mobile-title text-wrapped">Predict Your Sales</i>on</h4></li>
+            <li><h4 class="center-align light-green-text text-darken-4 mobile-title text-wrapped">PYS</i>on</h4></li>
             <li><a href="{{ url_for('get_sales') }}">Home</a></li>
             {% if session.user %}
             <li><a href="{{ url_for('dashboard', username=session['user']) }}">Sales Dashboard</a></li>

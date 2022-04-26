@@ -15,13 +15,20 @@
 
 <div class="container">
   <div class="row">
-    <div class="col s12 m8 offset-m2">
-      <div class="card-panel ">
-           
-          <p>{{ username }}'s  Total Sales:</p>
-          <p>{{ username }}'s  Total Revenue:</p>
-      </div>
-    </div>
+    <ul class="collapsible">
+      <li>
+        <div class="collapsible-header"><i class="material-icons"> </i>{{ username }}'s  Total Revenue:</div>
+        <div class="collapsible-body"><span>You currently have X</span></div>
+      </li>
+      <li>
+        <div class="collapsible-header"><i class="material-icons"> </i>{{ username }}'s  Total Sales:</div>
+        <div class="collapsible-body"><span>You currently have X</span></div>
+      </li>
+      <li>
+        <div class="collapsible-header"><i class="material-icons"> </i> {{ username }}'s  Total Off Target: </div>
+        <div class="collapsible-body"><span>You currently have X</span></div>
+      </li>
+    </ul>
   </div>
   <div class="row">
     <div class="col s12 m8 offset-m2">

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content  %}
+
+    <h3 class="light-green-text text-darken-2 center-align">Edit User:</h3>
+  
+             <!-- Edit User -->
+            <div class="row">
+                <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('edit_user', user_id=user._id) }}">
+                  <div class="card-panel ">
+                      <!-- Username-->
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="fas fa-user-plus prefix light-green-text text-darken-2"></i>
+                            <input id="username" name="username" type="text" class="validate" minlength="5" 
+                            maxlength="15" value="{{ user.username}}" required pattern="^[a-zA-Z0-9]{5,15}$">
+                            <label for="username">Username</label>
+                          </div>
+                    </div>
+                    <!-- password-->
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="fas fa-user-lock prefix light-green-text text-darken-2"></i>
+                           <input id="password" name="password" type="password" minlength="5" maxlength="15" 
+                           required class="validate" pattern="^[a-zA-Z0-9]{5,15}$">
+                           <label for="password">Password</label>
+                        </div>
+                    </div>
+                    <!-- Edit button-->
+                    <div class="row">
+                        <div class="col s12 center-align"> 
+                            <a href="{{ url_for('get_users') }}" class="btn-large red text-shadow">
+                                Cancel <i class="fas fa-times-circle right"></i>
+                            </a>
+                            <button type="submit" class=" btn-large light-green darken-2 text-shadow">
+                                Edit User <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>    
+            </div> 
+        </form>
+    </div>
+
+{% endblock %}

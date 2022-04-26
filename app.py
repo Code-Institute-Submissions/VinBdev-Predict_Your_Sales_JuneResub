@@ -153,6 +153,18 @@ def get_users():
 @app.route("/new_user", methods=["GET", "POST"])
 def new_user():
     if request.method == "POST":
+        existing_user = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()})
+
+        if existing_user:
+
+            flash("Username already used")
+            return redirect(url_for("register"))
+
+        register = {
+            "username": request.form.get("username").lower(),
+            "password": generate_password_hash(request.form.get("password"))
+        } 
         user = {
             "username": request.form.get("username"), 
             "password": request.form.get("password") 
@@ -162,6 +174,20 @@ def new_user():
         return redirect(url_for('get_users'))
 
     return render_template("new_user.html")
+
+
+@app.route("/edit_user/<user_id>", methods=["GET", "POST"])
+def edit_user(user_id):
+    if request.method == "POST":
+        submit = {
+            "username": request.form.get("username")
+        }
+        mongo.db.users.replace_one({"_id": ObjectId(user_id)}, submit)
+        flash("User Successfully Updated!")
+        return redirect(url_for("get_users"))
+
+    user = mongo.db.users.find_one({"_id": ObjectId(user_id)})
+    return render_template("edit_user.html", user=user)
 
 
 if __name__ == "__main__":
