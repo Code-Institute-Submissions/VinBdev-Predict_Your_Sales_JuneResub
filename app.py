@@ -194,7 +194,7 @@ def edit_user(user_id):
 def delete_user(user_id):
     mongo.db.users.delete_one({"_id": ObjectId(user_id)})
     flash("User Successfully Deleted")
-    return redirect(url_for("users"))
+    return redirect(url_for("get_users"))
 
 
 
