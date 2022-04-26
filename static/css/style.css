@@ -24,3 +24,10 @@
 .mobile-title{
     font-size: 10px;
 }
+
+.wrapper-footer{
+    padding: 0px;
+    margin: 0px;
+    height: 1rem;
+    display: block;
+}

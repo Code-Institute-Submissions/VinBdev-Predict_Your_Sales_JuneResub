@@ -15,7 +15,7 @@
 <body>
     <header>
         <!-- Top navbar-->
-        <nav class="nav-extended text-shadow green darken-1">
+        <nav class="nav-extended text-shadow blue-grey darken-4">
             <div class="nav-wrapper">
                 <a href="{{ url_for('get_sales') }}" class="brand-logo text-wrapped">Predict Your Sales  </i></a>
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="material-icons"><i class="fas fa-bars"></i></i></a>
@@ -38,7 +38,7 @@
         <!-- Mobile side navbar-->
 
         <ul class="sidenav" id="mobile-demo">
-            <li><h4 class="center-align light-green-text text-darken-4 mobile-title text-wrapped">PYS</i>on</h4></li>
+            <li><h4 class="center-align light-grey-text text-darken-4 mobile-title text-wrapped">PYS</i>on</h4></li>
             <li><a href="{{ url_for('get_sales') }}">Home</a></li>
             {% if session.user %}
             <li><a href="{{ url_for('dashboard', username=session['user']) }}">Sales Dashboard</a></li>
@@ -60,7 +60,7 @@
             {% if messages %} 
                 {% for message in messages %} 
                     <div class="row flashes">
-                        <h4 class="light-green lighten-2 center-align">{{ message }}</h4>
+                        <h4 class="blue-grey darken-4 center-align">{{ message }}</h4>
                     </div>
                 {% endfor %}
             {% endif %} 
@@ -71,6 +71,19 @@
     {% block content %} 
     {% endblock %} 
     </main>
+
+    <div class="wrapper wrapper-footer blue-grey darken-4">
+        <footer>
+            <nav class=" blue-grey darken-4">
+                <ul>
+                    <li>Thing1 </li>
+                    <li>Thing2 </li>
+                    <li>Thing3 </li>
+                    <li>@ 2022 Educational Project </li>
+                </ul>
+            </nav>
+        </footer>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>

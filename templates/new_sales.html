@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% block content  %}
 
-    <h3 class="light-green-text text-darken-2 center-align">Upload a new sale:</h3>
+    <h3 class="light-grey-text text-darken-2 center-align">Upload a new sale:</h3>
  
     <div class="row card-panel grey lighten-3">
         <form class="col s12" method="POST" action="{{ url_for('new_sales') }}">
             <!-- Customer Name-->
         <div class="row">
             <div class="input-field col s12">
-            <i class="fas fa-pencil-alt prefix light-green-text text-darken-2"> </i>
+            <i class="fas fa-pencil-alt prefix light-grey-text text-darken-2"> </i>
             <input id="customer_name" name="customer_name" minlength="5" maxlength="50"
              type="text" class="validate" required>
             <label for="customer_name">Customer Name</label>
@@ -17,7 +17,7 @@
         <!-- Sales Amount -->
         <div class="row">    
             <div class="input-field col s12">
-                <i class="fas fa-sack-dollar prefix light-green-text text-darken-2"> </i>
+                <i class="fas fa-sack-dollar prefix light-grey-text text-darken-2"> </i>
                  <br>
                  <input id="sale_amount" name="sale_amount" minlength="5" maxlength="50"
                  type="text" class="validate" required>
@@ -27,7 +27,7 @@
                 <!-- Sales Decription -->
         <div class="row">    
             <div class="input-field col s12">
-                <i class="fas fa-align-left prefix light-green-text text-darken-2"> </i>
+                <i class="fas fa-align-left prefix light-grey-text text-darken-2"> </i>
                 <textarea id="sale_description" name="sale_description" minlength="50" maxlength="500"
                 type="text" class="materialize-textarea validate" required></textarea>
                 <label for="sale_description">Sale Description </label>
@@ -36,7 +36,7 @@
                 <!-- Close Date Field -->
         <div class="row">
             <div class="input-field col s12">
-            <i class="fas fa-calendar-alt prefix light-green-text text-darken-2"> </i>
+            <i class="fas fa-calendar-alt prefix light-grey-text text-darken-2"> </i>
             <input id="close_date" name="close_date" minlength="5" maxlength="50"
              type="text" class="datepicker validate" required>
             <label for="close_date">Close Date</label>
@@ -46,7 +46,7 @@
         <div class="row">
             <div class="input-field col s12">
                 <div class="switch">
-                    <i class="fas fa-exclamation-circle prefix light-green-text text-darken-2"> </i>
+                    <i class="fas fa-exclamation-circle prefix light-grey-text text-darken-2"> </i>
                     <label for="purchase_approval"> 
                         <input type="checkbox" id="purchase_approval" name="purchase_approval">
                         <span class="lever"></span>

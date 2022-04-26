@@ -1,12 +1,12 @@
 {% extends "base.html" %}  
 {% block content %}
 
-    <h3 class="light-green-text text-darken-2 center-align">Sales in progress:</h3>
+    <h3 class="light-grey-text text-darken-2 center-align">Sales in progress:</h3>
 
     <ul class="collapsible popout">
         {% for sale in sales %} 
         <li>
-            <div class="collapsible-header white-text light-green darken-2 text-shadow">
+            <div class="collapsible-header white-text blue-grey darken-4 text-shadow">
                 <div class="col s3">
                     <i class="fas fa-caret-down"></i>
                     {% if session.user|lower == sale.created_by|lower  %}
@@ -19,7 +19,7 @@
                  
               <strong>{{ sale.customer_name }}</strong>: {{ sale.close_date }}
               {% if sale.purchase_approval == "Yes" %}
-                <i class="fas fa-exclamation-circle light-green-text text-lighten-2 tooltipped"
+                <i class="fas fa-exclamation-circle light-grey-text text-lighten-2 tooltipped"
                  data-position="right" data-tooltip="Approval Needed!"> </i>    
               {% endif %} 
                 </div>
