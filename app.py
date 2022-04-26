@@ -154,7 +154,8 @@ def get_users():
 def new_user():
     if request.method == "POST":
         user = {
-            "username": request.form.get("username") 
+            "username": request.form.get("username"), 
+            "password": request.form.get("password") 
         }
         mongo.db.users.insert_one(user)
         flash("New User Added")
