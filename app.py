@@ -159,7 +159,7 @@ def new_user():
         }
         mongo.db.users.insert_one(user)
         flash("New User Added")
-        return redirect(url_for('new_user'))
+        return redirect(url_for('get_users'))
 
     return render_template("new_user.html")
 
