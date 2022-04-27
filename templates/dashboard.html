@@ -3,12 +3,13 @@
 
 <div class="container">
   <div class="row">
-    <div class="col s12 m8 offset-m2">
-      <div class="card-panel ">
-          <h3 class="center-align light-grey-text text-darken-2">
-            {{ username }}'s   Dashboard:
-          </h3>
-      </div>
+    <div class="col s12 m8 offset-m2"> 
+          <h5 class="center-align light-grey-text text-darken-2">
+            The purpose of this dashboard is to provide {{ username }} with a clear understanding of their job
+             description so they can strategically align their work to their duties. It will also allow {{ username }} 
+             to monitor their career goals, vacation days and sick days including an option to upload documents
+              supporting any sick leave.
+          </h5>  
     </div>
   </div>
 </div>
@@ -17,11 +18,18 @@
   <div class="row">
     <ul class="collapsible">
       <li>
-        <div class="collapsible-header"><i class="material-icons"> </i>{{ username }}'s  Profile Picture</div>
-        <div class="collapsible-body"><span>You currently have {{ username.sale_amount }}</span></div>
+        <div class="collapsible-header"><i class="material-icons"> </i>{{ username }}'s Job Description:</div>
+        <div class="collapsible-body"><span>The Admins role is to support, track and monitor the sales team. 
+          They have full admin access to the dashboard meaning they can add and remove new and old users as well.
+          This is a leadership role designed to encourage a clear line of communication between what the manager 
+          expects of each employee in terms of sales generated, career progression and time absent from work. 
+          The aim here is to try and decentralize the power balance so if any issues do arise there is clear 
+          evidence to support any future decisions.  E.g. promoting an employee for over-achieving their sales 
+          target, having good attendance, being career driven and motivated. 
+        </span></div>
       </li>
       <li>
-        <div class="collapsible-header"><i class="material-icons"> </i>{{ username }}'s  Total Sales</div>
+        <div class="collapsible-header"><i class="material-icons"> </i>{{ username }}'s Career Goals</div>
         <div class="collapsible-body"><span>You currently have {{ username.sales }}</span></div>
       </li>
       <li>

@@ -22,7 +22,7 @@
                 <ul class="right hide-on-med-and-down">
                     <li><a href="{{ url_for('get_sales') }}">Home</a></li>
                     {% if session.user %}
-                        <li><a href="{{ url_for('dashboard', username=session['user']) }}">Sales Dashboard</a></li>
+                        <li><a href="{{ url_for('dashboard', username=session['user']) }}">{{ username }}'s Dashboard</a></li>
                         <li><a href="{{ url_for('new_sales') }}">New Sales</a></li>
                         {% if session.user|lower == "admin"|lower %} 
                         <li><a href="{{ url_for('get_users') }}">Manage Users</a></li> 
