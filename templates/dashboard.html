@@ -14,100 +14,40 @@
               supporting any sick leave.
           </h5>  
 
-          <button>Upload Your Info Here</button>
+          <a href="{{ url_for('edit_dashboard') }}">  Upload Your Info Here</a> 
     </div>
   </div>
 </div>
 
 <div class="container">
   <div class="row">
-    <ul class="collapsible">
+    <ul class="collapsible popout">
+      {% for dash in dashboards %} 
       <li>
-        <div class="collapsible-header"><i class="material-icons"> </i>{{ username }}'s Job Description:</div>
-        <div class="collapsible-body"><span>The Admin is the Sales Manager, their role is to support, track and monitor the sales team. 
-          They have full admin access to the dashboard meaning they can add and remove new and old users as well.
-          This is a leadership role designed to encourage a clear line of communication between what the manager 
-          expects of each employee in terms of sales generated, career progression and time absent from work. 
-          The aim here is to try and decentralize the power balance so if any issues do arise there is clear 
-          evidence to support any future decisions.  E.g. promoting an employee for over-achieving their sales 
-          target, having good attendance, being career driven and motivated. 
-        </span></div>
+          <div class="collapsible-header white-text blue-grey darken-4 text-shadow">
+              <div class="col s3">
+                  <i class="fas fa-caret-down"></i>
+                  {% if session.user|lower == user.username|lower  %}
+                      <a href="{{ url_for('delete_dash', dash_id=dash._id) }}" class="btn-small blue accent-2">Delete</a>
+                      <a href="{{ url_for('edit_dashboard', dash_id=dash._id) }}" class="btn-small grey accent-2">Edit</a>
+                  {% endif %} 
+              </div>
+              <div class="col s9">
+                  
+               
+            <strong>{{ dash.job_description }}</strong>: {{ dash.holiday_start_date }} , {{ dash.holiday_end_date }}
+            {% if sale.purchase_approval == "Yes" %}
+              <i class="fas fa-exclamation-circle light-grey-text text-lighten-2 tooltipped"
+               data-position="right" data-tooltip="Approval Needed!"> </i>    
+            {% endif %} 
+              </div>
+          </div>    
+          <div class="collapsible-body"> 
+              <p>{{ dash.career_goals }}</p> 
+          </div>
       </li>
-      <li>
-        <div class="collapsible-header"><i class="material-icons"> </i>{{ username }}'s Career Goals</div>
-        <div class="collapsible-body"><span>You currently have {{ sales }}</span></div>
-      </li>
-      <li>
-        <div class="collapsible-header"><i class="material-icons"> </i> {{ username }}'s Holidays </div>
-        <div class="collapsible-body"><div class="row card-panel grey lighten-3">
-          <form class="col s12" method="POST" action="{{ url_for('new_sales') }}">
-              <!-- Customer Name-->
-          <div class="row">
-              <div class="input-field col s12">
-              <i class="fas fa-pencil-alt prefix light-grey-text text-darken-2"> </i>
-              <input id="customer_name" name="customer_name" minlength="5" maxlength="50"
-               type="text" class="validate" required>
-              <label for="customer_name">Customer Name</label>
-              </div>
-          </div>
-          <!-- Sales Amount -->
-          <div class="row">    
-              <div class="input-field col s12">
-                  <i class="fas fa-sack-dollar prefix light-grey-text text-darken-2"> </i>
-                   <br>
-                   <input id="sale_amount" name="sale_amount" minlength="5" maxlength="50"
-                   type="text" class="validate" required>
-                  <label for="sale_amount">Sale Amount (€): </label>
-              </div>
-          </div>
-                  <!-- Sales Decription -->
-          <div class="row">    
-              <div class="input-field col s12">
-                  <i class="fas fa-align-left prefix light-grey-text text-darken-2"> </i>
-                  <textarea id="sale_description" name="sale_description" minlength="50" maxlength="500"
-                  type="text" class="materialize-textarea validate" required></textarea>
-                  <label for="sale_description">Sale Description </label>
-              </div>
-          </div>
-                  <!-- Close Date Field -->
-          <div class="row">
-              <div class="input-field col s12">
-              <i class="fas fa-calendar-alt prefix light-grey-text text-darken-2"> </i>
-              <input id="close_date" name="close_date" minlength="5" maxlength="50"
-               type="text" class="datepicker validate" required>
-              <label for="close_date">Close Date</label>
-              </div>
-          </div>
-                  <!-- Approval Field   -->
-          <div class="row">
-              <div class="input-field col s12">
-                  <div class="switch">
-                      <i class="fas fa-exclamation-circle prefix light-grey-text text-darken-2"> </i>
-                      <label for="purchase_approval"> 
-                          <input type="checkbox" id="purchase_approval" name="purchase_approval">
-                          <span class="lever"></span>
-                        Needs Approval
-                      </label>
-                    </div>
-              </div>
-          </div>
-          <!-- Submit button -->
-          <div class="row">
-              <div class="col s12 center-align">
-                  <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-                      <i class="fas fa-plus-square right"> </i>
-                  </button>
-              </div>
-          </div>
-          </form>
-      </div></div>
-      </li>
-      <li>
-        <div class="collapsible-header"><i class="material-icons"> </i> {{ username }}'s Feedback </div>
-        <div class="collapsible-body"><span>Currently I have only positive feedback! This site has given
-          such a clear format for ensuring I am going in the right direction </span></div>
-      </li>
-      </ul>
+      {% endfor %} 
+  </ul>
   </div> 
   
 </div>

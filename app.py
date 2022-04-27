@@ -197,6 +197,24 @@ def delete_user(user_id):
     return redirect(url_for("get_users"))
 
 
+@app.route("/edit_dashboard/<dash_id>", methods = ["GET", "POST"])
+def edit_dashboard(dash_id):
+    if request.method == "POST":
+        submit = {
+            "job_description": request.form.get("job_description"),
+            "career_goals": request.form.get("career_goals"),
+            "feedback": request.form.get("feedback"),
+            "holiday_start_date": request.form.get("holiday_start_date"),
+            "holiday_end_date": request.form.get("holiday_end_date")
+        }
+        mongo.db.dashboard_info.replace_one({"_id": ObjectId(dash_id)}, submit)
+        flash("Congratulations! Dashboard successfully edited!")
+
+    dash = mongo.db.dashboard_info.find_one({"_id": ObjectId(dash_id)})
+    return render_template("edit_dashboard.html", dash=dash,)
+
+
+
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
