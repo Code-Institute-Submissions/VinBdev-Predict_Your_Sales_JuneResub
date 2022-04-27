@@ -17,12 +17,12 @@
         <!-- Top navbar-->
         <nav class="nav-extended navbar text-shadow blue-grey darken-4">
             <div class="nav-wrapper">
-                <a href="{{ url_for('get_sales') }}" class="brand-logo text-wrapped">Predict Your Sales  </i></a>
+                <a href="{{ url_for('get_sales') }}" class="brand-logo text-wrapped">Predict Sales  </i></a>
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="material-icons"><i class="fas fa-bars"></i></i></a>
                 <ul class="right hide-on-med-and-down">
                     <li><a href="{{ url_for('get_sales') }}">Home</a></li>
                     {% if session.user %}
-                        <li><a href="{{ url_for('dashboard', username=session['user']) }}">{{ username }}'s Dashboard</a></li>
+                        <li><a href="{{ url_for('dashboard', username=session['user']) }}">  Dashboard</a></li>
                         <li><a href="{{ url_for('new_sales') }}">New Sales</a></li>
                         {% if session.user|lower == "admin"|lower %} 
                         <li><a href="{{ url_for('get_users') }}">Manage Users</a></li> 
@@ -38,7 +38,7 @@
         <!-- Mobile side navbar-->
 
         <ul class="sidenav" id="mobile-demo">
-            <li><h4 class="center-align light-grey-text text-darken-4 mobile-title text-wrapped">PYS</i>on</h4></li>
+            <li><h4 class="center-align light-grey-text text-darken-4 mobile-title text-wrapped">Predict Sales</i>on</h4></li>
             <li><a href="{{ url_for('get_sales') }}">Home</a></li>
             {% if session.user %}
             <li><a href="{{ url_for('dashboard', username=session['user']) }}">Sales Dashboard</a></li>
