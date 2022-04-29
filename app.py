@@ -186,7 +186,8 @@ def new_user():
 def edit_user(user_id):
     if request.method == "POST":
         submit = {
-            "username": request.form.get("username")
+            "username": request.form.get("username"),
+            "password": generate_password_hash(request.form.get("password"))
         }
         mongo.db.users.replace_one({"_id": ObjectId(user_id)}, submit)
         flash("User Successfully Updated!")
