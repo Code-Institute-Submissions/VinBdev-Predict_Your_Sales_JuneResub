@@ -80,7 +80,7 @@ def login():
     return render_template("login.html")
 
 
-@app.route("/dashboard/<username>", methods=["GET", "POST"])
+@app.route("/dashboard/", methods=["GET", "POST"])
 def dashboard(username):
     # grab the session user's username from db
     username = mongo.db.users.find_one(
@@ -101,6 +101,9 @@ def logout():
 
 @app.route("/new_sales", methods=["GET", "POST"])
 def new_sales():
+    if "user" not in session:
+        return redirect(url_for("login"))
+    form_errors = []
     if request.method == "POST":
         purchase_approval = "yes" if request.form.get("purchase_approval") else "no"
         sale = {
@@ -111,11 +114,18 @@ def new_sales():
             "purchase_approval": purchase_approval,
             "created_by": session["user"]
         }
-        mongo.db.sales.insert_one(sale)
-        flash("Congratulations! Sale successfully uploaded!")
-        return redirect(url_for("get_sales"))
+        if len(sale["customer_name"]) < 3 or len(sale["customer_name"]) > 200:
+            form_errors.append("Customer name must be between 2 and 200 characters long.")
 
-    return render_template("new_sales.html")    
+        # other validation checks like the if statement above
+        if len(form_errors) == 0:
+            # put the data in the db
+            mongo.db.sales.insert_one(sale)
+            flash("Congratulations! Sale successfully uploaded!")
+            return redirect(url_for("dashboard"))
+
+    return render_template("new_sales.html", form_errors=form_errors) 
+       
 
 
 @app.route("/edit_sale/<sale_id>", methods = ["GET", "POST"])
@@ -165,11 +175,7 @@ def new_user():
             "username": request.form.get("username").lower(),
             "password": generate_password_hash(request.form.get("password"))
         } 
-        user = {
-            "username": request.form.get("username"), 
-            "password": request.form.get("password") 
-        }
-        mongo.db.users.insert_one(user)
+        mongo.db.users.insert_one(register)
         flash("New User Added")
         return redirect(url_for('get_users'))
 
@@ -197,21 +203,21 @@ def delete_user(user_id):
     return redirect(url_for("get_users"))
 
 
-@app.route("/edit_dashboard/<dash_id>", methods = ["GET", "POST"])
-def edit_dashboard(dash_id):
+@app.route("/edit_dashboard/", methods = ["GET", "POST"])
+def edit_dashboard():
     if request.method == "POST":
-        submit = {
+        submit = {  
             "job_description": request.form.get("job_description"),
             "career_goals": request.form.get("career_goals"),
             "feedback": request.form.get("feedback"),
             "holiday_start_date": request.form.get("holiday_start_date"),
             "holiday_end_date": request.form.get("holiday_end_date")
         }
-        mongo.db.dashboard_info.replace_one({"_id": ObjectId(dash_id)}, submit)
+        mongo.db.dashboard_info.replace_one({"username": session["user"]}, submit)
         flash("Congratulations! Dashboard successfully edited!")
 
-    dash = mongo.db.dashboard_info.find_one({"_id": ObjectId(dash_id)})
-    return render_template("edit_dashboard.html", dash=dash,)
+    dash = mongo.db.dashboard_info.find_one({"username": session["user"]})
+    return render_template("edit_dashboard.html", dash=dash)
 
 
 
