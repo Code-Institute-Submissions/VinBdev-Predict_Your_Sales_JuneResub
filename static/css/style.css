@@ -20,6 +20,7 @@
 .brand-logo{
     font-size: 2rem;
 }
+/* Add User Section */ 
 
 .add-user{
     background-color: rgb(41, 42, 64);
@@ -29,16 +30,20 @@
 .flashes h4 {
     line-height: 2; 
 }
- 
+ /* Range Section */ 
+
 .range-field{
     font-size: 20px;
     font-weight: 400;
 }
 
+/* Button sizing */ 
+
 .btn-small{
     margin: 5px;
 }
 
+/* Footer */ 
 
 .page-footer{
      position:fixed;
@@ -47,6 +52,8 @@
      padding: 10px;
      width:100%; 
 }
+
+/* Titles */ 
 
 h4 {
     color: white;
@@ -59,9 +66,13 @@ h4 {
     text-decoration: underline;
 }
 
+/* Body */ 
+
 .main-body{
     padding-bottom: 50px;
 }
+
+/* Bulletpoint lists */ 
 
 ul.a {
     list-style-type: circle;

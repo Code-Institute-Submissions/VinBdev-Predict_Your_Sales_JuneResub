@@ -19,6 +19,7 @@ app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 
 
+#get sales function
 @app.route("/")
 @app.route("/get_sales")
 def get_sales():
@@ -26,6 +27,7 @@ def get_sales():
     return render_template("sales.html", sales=sales)
 
 
+# search option
 @app.route("/search", methods=["GET", "POST"])
 def search():
     query = request.form.get("query")
@@ -58,6 +60,7 @@ def register():
     return render_template("register.html") 
 
 
+#login function
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -87,6 +90,7 @@ def login():
     return render_template("login.html")
 
 
+#dashboard function
 @app.route("/dashboard/", methods=["GET", "POST"])
 def dashboard():
     dash = mongo.db.dashboard_info.find_one({"username": session["user"]})
@@ -104,7 +108,7 @@ def dashboard():
     return redirect(url_for("login"))    
 
 
-
+# logout function
 @app.route("/logout")
 def logout():
     # remove user from session cookies
@@ -113,6 +117,7 @@ def logout():
     return redirect(url_for("login"))
 
 
+# create new sale function
 @app.route("/new_sales", methods=["GET", "POST"])
 def new_sales():
     if "user" not in session:
@@ -142,6 +147,7 @@ def new_sales():
        
 
 
+# edit sale function
 @app.route("/edit_sale/<sale_id>", methods = ["GET", "POST"])
 def edit_sale(sale_id):
     if "user" not in session:
@@ -167,6 +173,7 @@ def edit_sale(sale_id):
     return render_template("edit_sale.html", sale=sale,)
 
 
+# delete sale function
 @app.route("/delete_sale/<sale_id>")
 def delete_sale(sale_id):
     if "user" not in session:
@@ -180,6 +187,7 @@ def delete_sale(sale_id):
     return redirect(url_for("get_sales"))
 
 
+# get users function 
 @app.route("/get_users")
 def get_users():
     if "user" not in session:
@@ -192,6 +200,7 @@ def get_users():
     return render_template("users.html", users=users)
 
 
+# creaye new user function 
 @app.route("/new_user", methods=["GET", "POST"])
 def new_user():
     if "user" not in session:
@@ -220,6 +229,7 @@ def new_user():
     return render_template("new_user.html")
 
 
+#edit user function
 @app.route("/edit_user/<user_id>", methods=["GET", "POST"])
 def edit_user(user_id):
     if "admin"  in session:
@@ -238,6 +248,7 @@ def edit_user(user_id):
     return render_template("edit_user.html", user=user)
 
 
+# delete user function
 @app.route("/delete_user/<user_id>")
 def delete_user(user_id):
     if "admin"  in session:
