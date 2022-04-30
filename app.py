@@ -82,13 +82,20 @@ def login():
 
 @app.route("/dashboard/", methods=["GET", "POST"])
 def dashboard():
+    dash = mongo.db.dashboard_info.find_one({"username": session["user"]})
+    if "user" not in session:
+        return redirect(url_for("login"))
+    form_errors = []
     # grab the session user's username from db
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
 
     if session["user"]:	
-        return render_template("dashboard.html", username=username)	
+        return render_template("dashboard.html", dash=dash, username=username)	
+
+    
     return redirect(url_for("login"))    
+
 
 
 @app.route("/logout")
@@ -130,6 +137,12 @@ def new_sales():
 
 @app.route("/edit_sale/<sale_id>", methods = ["GET", "POST"])
 def edit_sale(sale_id):
+    if "user" not in session:
+        return redirect(url_for("login"))
+    if "sale.created_by" in session: 
+        redirect(url_for("login"))
+        flash("User not logged in")
+    form_errors = []
     if request.method == "POST":
         purchase_approval = "Yes" if request.form.get("purchase_approval") else "No"
         submit = {
@@ -149,6 +162,12 @@ def edit_sale(sale_id):
 
 @app.route("/delete_sale/<sale_id>")
 def delete_sale(sale_id):
+    if "user" not in session:
+        return redirect(url_for("login"))
+    if "sale.created_by" in session: 
+        redirect(url_for("login"))
+        flash("User not logged in")
+    form_errors = []
     mongo.db.sales.delete_many({"_id": ObjectId(sale_id)})
     flash("Sale Successfully Deleted")
     return redirect(url_for("get_sales"))
@@ -156,12 +175,24 @@ def delete_sale(sale_id):
 
 @app.route("/get_users")
 def get_users():
+    if "user" not in session:
+        return redirect(url_for("login"))
+    if "admin" in session: 
+        redirect(url_for("login"))
+        flash("User not logged in")
+    form_errors = []
     users = list(mongo.db.users.find().sort("username"))
     return render_template("users.html", users=users)
 
 
 @app.route("/new_user", methods=["GET", "POST"])
 def new_user():
+    if "user" not in session:
+        return redirect(url_for("login"))
+    if "admin" not in session: 
+        redirect(url_for("login"))
+        flash("User not logged in")
+    form_errors = []
     if request.method == "POST":
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
@@ -184,6 +215,9 @@ def new_user():
 
 @app.route("/edit_user/<user_id>", methods=["GET", "POST"])
 def edit_user(user_id):
+    if "admin"  in session:
+        return redirect(url_for("login"))
+    form_errors = []
     if request.method == "POST":
         submit = {
             "username": request.form.get("username"),
@@ -199,13 +233,19 @@ def edit_user(user_id):
 
 @app.route("/delete_user/<user_id>")
 def delete_user(user_id):
+    if "admin"  in session:
+        return redirect(url_for("login"))
+    form_errors = []
     mongo.db.users.delete_one({"_id": ObjectId(user_id)})
     flash("User Successfully Deleted")
     return redirect(url_for("get_users"))
 
 
-@app.route("/edit_dashboard/", methods = ["GET", "POST"])
-def edit_dashboard():
+@app.route("/edit_dashboard/<dash_id>", methods=["GET", "POST"])
+def edit_dashboard(username):
+    username = session["user"]
+    if "user" not in session:
+        return redirect(url_for("login"))
     if request.method == "POST":
         submit = {  
             "job_description": request.form.get("job_description"),
@@ -214,11 +254,11 @@ def edit_dashboard():
             "holiday_start_date": request.form.get("holiday_start_date"),
             "holiday_end_date": request.form.get("holiday_end_date")
         }
-        mongo.db.dashboard_info.replace_one({"username": session["user"]}, submit)
+        mongo.db.dashboard_info.replace_one({"_id": ObjectId(dash_id)}, submit)
         flash("Congratulations! Dashboard successfully edited!")
 
-    dash = mongo.db.dashboard_info.find_one({"username": session["user"]})
-    return render_template("edit_dashboard.html", dash=dash)
+    dash = mongo.db.dashboard_info.find_one({"_id": ObjectId(dash_id)})
+    return render_template("edit_dashboard.html", dash=dash, username=username)
 
 
 

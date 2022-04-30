@@ -3,57 +3,119 @@
 
 <div class="container">
   <div class="row">
-    <div class="col s12 m8 offset-m2"> 
-      <h3 class="center-align light-grey-text text-darken-2">
-        {{ username }}'s Dashboard
-      </h3>
-          <h5 class="center-align light-grey-text text-darken-2">
-            The purpose of this dashboard is to provide {{ username }} with a clear understanding of their job
-             description so they can strategically align their work to their duties. It will also allow {{ username }} 
-             to monitor their career goals, vacation days and sick days including an option to upload documents
-              supporting any sick leave.
-          </h5>  
+    <div class="col s12"> 
+      <h1 class="center-align light-grey-text text-darken-2">
+        <strong>Sales's Dashboard</strong> 
+      </h1>
+          <h3 class="center-align light-grey-text text-darken-2">
+            The purpose of this dashboard is to provide an overview to both salespoeple and managers of the sales team function, user 
+            capabilities as well as helpful resources!
+          </h3>  
 
-          <a href="{{ url_for('edit_dashboard') }}">  Upload Your Info Here</a> 
+           
     </div>
   </div>
+</div>
 </div>
 
 <div class="container">
   <div class="row">
-    <ul class="collapsible popout">
-      {% for dash in dashboards %} 
-      <li>
-          <div class="collapsible-header white-text blue-grey darken-4 text-shadow">
-              <div class="col s3">
-                  <i class="fas fa-caret-down"></i>
-                  {% if session.user|lower == user.username|lower  %}
-                      <a href="{{ url_for('delete_dash', dash_id=dash._id) }}" class="btn-small blue accent-2">Delete</a>
-                      <a href="{{ url_for('edit_dashboard', dash_id=dash._id) }}" class="btn-small grey accent-2">Edit</a>
-                  {% endif %} 
-              </div>
-              <div class="col s9">
-                  
-               
-            <strong>{{ dash.job_description }}</strong>: {{ dash.holiday_start_date }} , {{ dash.holiday_end_date }}
-            {% if sale.purchase_approval == "Yes" %}
-              <i class="fas fa-exclamation-circle light-grey-text text-lighten-2 tooltipped"
-               data-position="right" data-tooltip="Approval Needed!"> </i>    
-            {% endif %} 
-              </div>
-          </div>    
-          <div class="collapsible-body"> 
-              <p>{{ dash.career_goals }}</p> 
+    <div class="col s12 l6">
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title dashboard-card"> <strong>User/ Salesperson : </strong>
+            </span>
+          <h5>Role Description </h5>
+          <p>The role of the Salesperson is to prospect into a series of leads that are fed into 
+            the sales team by our marekting department. These
+          </p>
+          <h5>Salesperson App Permissions</h5>
+          <p>The Salesperson has the ability to register and create an account by registering a username and password.
+            At this stage there informatoin will be logged by the database as a user account. They will then have the 
+            ability to upload sales information about the prospective sales. This will give a clear indication of any
+            new opportunities and sales created for reporting purposes. They ca create, read, update and delte there 
+            individual sales.</p>
+          <h5>Career Progression</h5>
+          <p>Career progression is not guaranteed or gifted, this is awarded to those who do exceptional work
+            and who cimmit themselves and their efforts to the success of the team. We want clear guidelines on 
+            how to progress your career, therefore once any salesperson achieves their target they are instructed to
+            contact the manager to discuss what direction they would liek to go. Whether this be into management or
+            to be provided with additional resources to train with anohter skillset e.g. software development.
+          </p>
+          <h5>Bonuses & Pay</h5>
+          <p>There is a competetive bonus structure and commission plan to keep you motivated! All employees will have an 
+            ageed basic wage as well as sign the annual commission agreement. If an employee exceeds any of the following 
+            duties they will be applicable for a quarterly bonus. Such as over 150% of revenue target, recognised as a supportive
+             team player helping others in the team to succeed and actively look to learn/ acquire more skills.
+          </p>
+          
+        </div>
+      </div>
+    </div>
+    <div class="col s12 l6">
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title dashboard-card"> <strong>Admin/ Sales Manager</strong>
+            </span>
+          <h5>Role Description</h5>
+          <p>The role of the Sales Manager is to guide and lead the sales team to success. the most important of these 
+            goals is to achieve or overachieve on sales targets. Second to this the role requires confidence, leadership
+            and experience. To enable and support each seller so that they can best perform and achive their own duties. 
+            Leading by example is the best practice for this. 
+          </p>
+          <h5>Salesperson Permissions</h5>
+          <p>The Admin/ Manager has the same permissions as a seller with the additoinal functoinality of being able to
+             add and remove salespeolpe to and from the team. Therefore the manager can create, read, update and delete 
+             new users as the team changes in size. </p>
+          <h5>Career Progression</h5>
+          <p>Same as a seller, career progression is not guaranteed or gifted, this is awarded to those who do exxceptional work
+            and who cimmit themselves and their efforts to the success of the team. A manager looking to be promoted to a Director
+            must lead by example, have a proven track record of reaching targets, be creative by bringing new approaches and fresh
+             ideas to the Senior Leadership team. In doing this, the conversatoin then changes from what the company can do for 
+             the manager, to what the manager can do for the company growth.
+          </p>
+          <h5>Bonuses & Pay</h5>
+          <p>There is a competetive bonus structure and commission plan to keep you motivated! Sales Managers are paid differently to
+            sellers as they are not responsible for just one sale they are responsible for all sales of the team and the overall team 
+            target. Therefore they receive an agreed upon higher base salary as well as quaterly and annual bonuses for achieving the
+             agreed upon target.
+          </p>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12 l6">
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">Salespeople Resources</span>
+          <div class="card-action">
+            <li><a class="ul-a" href="https://www.youtube.com/watch?v=rylwgRSgjG0">Be Motivated To Sell</a></li>
+            <li><a class="ul-a" href="https://www.youtube.com/watch?v=GrhSLf0I-HM">Always Be Closing</a></li>
+            <li><a class="ul-a" href="https://kapta.com/resources/key-account-management-blog/key-account-management/10-tips-for-successful-key-account-management">Guide to Manage Accounts</a></li>
+            <li><a class="ul-a" href="https://www.richardson.com/sales-resources/defining-consultative-sales/">Consulatative Selling </a></li>
+            <li><a class="ul-a" href="https://blog.hubspot.com/sales/habits-to-become-a-more-effective-salesperson">Habits of Successful Salespeople</a> </li>
           </div>
-      </li>
-      {% endfor %} 
-  </ul>
-  </div> 
-  
+      </div>
+    </div>
+    </div>
+    <div class="col s12 l6">
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">Sales Manager Resources</span>
+          <div class="card-action">
+            <li><a class="ul-a" href="https://salesdrive.info/key-strategies-for-successfully-managing-a-sales-team/">Sales Management Strategies</a></li>
+            <li><a class="ul-a" href="https://www.saleshacker.com/12-tips-on-managing-a-high-performing-sales-team/">Sales Management Tips</a></li>
+            <li><a class="ul-a" href="https://www.youtube.com/watch?v=-N45bnTaSss">Manage a remote team</a></li>
+            <li><a class="ul-a" href="https://www.youtube.com/watch?v=9X2fjctfIHs">Motivate When sales are down</a></li>
+            <li><a class="ul-a" href="https://www.salesreadinessgroup.com/blog/how-to-become-a-great-sales-leader">Become a great sales leader</a> </li>
+          </div>
+      </div>
+    </div>
+    </div>
+  </div>
 </div>
-
-
-   
-
+ 
    
 {% endblock %} }
