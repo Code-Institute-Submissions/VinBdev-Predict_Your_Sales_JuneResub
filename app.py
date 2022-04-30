@@ -26,6 +26,13 @@ def get_sales():
     return render_template("sales.html", sales=sales)
 
 
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    query = request.form.get("query")
+    sales = list(mongo.db.sales.find({"$text": {"$search": query}}))
+    return render_template("sales.html", sales=sales)
+
+
 @app.route("/register", methods=["GET", "POST"])   
 def register():
     if request.method == "POST":
@@ -239,27 +246,6 @@ def delete_user(user_id):
     mongo.db.users.delete_one({"_id": ObjectId(user_id)})
     flash("User Successfully Deleted")
     return redirect(url_for("get_users"))
-
-
-@app.route("/edit_dashboard/<dash_id>", methods=["GET", "POST"])
-def edit_dashboard(username):
-    username = session["user"]
-    if "user" not in session:
-        return redirect(url_for("login"))
-    if request.method == "POST":
-        submit = {  
-            "job_description": request.form.get("job_description"),
-            "career_goals": request.form.get("career_goals"),
-            "feedback": request.form.get("feedback"),
-            "holiday_start_date": request.form.get("holiday_start_date"),
-            "holiday_end_date": request.form.get("holiday_end_date")
-        }
-        mongo.db.dashboard_info.replace_one({"_id": ObjectId(dash_id)}, submit)
-        flash("Congratulations! Dashboard successfully edited!")
-
-    dash = mongo.db.dashboard_info.find_one({"_id": ObjectId(dash_id)})
-    return render_template("edit_dashboard.html", dash=dash, username=username)
-
 
 
 
