@@ -1,45 +1,44 @@
 {% extends "base.html" %}
 {% block content %} 
-        <!-- Title Section -->
+<!-- Title Section -->
 <h3 class="center-align">Register</h3>
-            <!-- Form Section -->
-  <div class="row">
-    <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('register') }}">
+<!-- Form Section -->
+<div class="row">
+   <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('register') }}">
       <div class="card-panel ">
-          <!-- Username-->
-        <div class="row">
+         <!-- Username-->
+         <div class="row">
             <div class="input-field col s12">
-                <i class="fas fa-user-plus prefix light-grey-text text-darken-2"></i>
-                <input id="username" name="username" type="text" class="validate" minlength="5" 
-                maxlength="15" required pattern="^[a-zA-Z0-9]{5,15}$">
-                <label for="username">Username</label>
-              </div>
-        </div>
-        <!-- password-->
-        <div class="row">
+               <i class="fas fa-user-plus prefix light-grey-text text-darken-2"></i>
+               <input id="username" name="username" type="text" class="validate" minlength="5" 
+                  maxlength="15" required pattern="^[a-zA-Z0-9]{5,15}$">
+               <label for="username">Username</label>
+            </div>
+         </div>
+         <!-- password-->
+         <div class="row">
             <div class="input-field col s12">
-                <i class="fas fa-user-lock prefix light-grey-text text-darken-2"></i>
+               <i class="fas fa-user-lock prefix light-grey-text text-darken-2"></i>
                <input id="password" name="password" type="password" minlength="5" maxlength="15" 
-               required class="validate" pattern="^[a-zA-Z0-9]{5,15}$">
+                  required class="validate" pattern="^[a-zA-Z0-9]{5,15}$">
                <label for="password">Password</label>
             </div>
-        </div>
-        <!-- register button-->
-        <div class="row">
+         </div>
+         <!-- register button-->
+         <div class="row">
             <button type="submit" class="col s12 btn-large blue-grey darken-4 text-shadow">
-                Register <i class="fas fa-sign-in-alt"></i>
+            Register <i class="fas fa-sign-in-alt"></i>
             </button>
-        </div>
+         </div>
       </div>
-    </form>
-  </div>
-
-  <div class="row">
-    <div class="col s12">
+   </form>
+</div>
+<div class="row">
+   <div class="col s12">
       <p class="center-align">
-        Already Registered?
-        <a href="{{ url_for('login') }}" class="light-grey-text text-darken-2">Log In</a>
+         Already Registered?
+         <a href="{{ url_for('login') }}" class="light-grey-text text-darken-2">Log In</a>
       </p>
-    </div>
-  </div>
+   </div>
+</div>
 {% endblock %} }

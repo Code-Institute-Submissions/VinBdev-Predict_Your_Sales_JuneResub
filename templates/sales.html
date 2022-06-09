@@ -1,62 +1,56 @@
 {% extends "base.html" %}  
 {% block content %}
 <!-- Title Section -->
-
-    <h3 class="light-grey-text text-darken-2 center-align">Sales in progress:</h3>
+<h3 class="light-grey-text text-darken-2 center-align">Sales in progress:</h3>
 <!-- Search Section -->
-
-    <div class="row card-panel grey lighten-4">
-        <form action="{{ url_for('search') }}" method="POST" class="col s12">
-            <div class="row valign-wrapper center-align">
-                <div class="input-field col s12 m8">
-                    <i class="fas fa-search prefix light-blue-text text-darken-1"></i>
-                        <input type="text" name="query" id="query" minlength="3" class="validate">
-                        <label for="query">Search Sales</label>
-                </div>
-                <div class="col s12 m4">
-                    <a href="{{ url_for('get_sales') }}" class="red btn text-shadow">Reset</a>
-                    <button type="submit" class="light-blue darken-2 btn text-shadow ">
-                        <i class="fas fa-search left"></i> Search
-                    </button>
-                </div>
-            </div>
-        </form>
-    </div>
+<div class="row card-panel grey lighten-4">
+   <form action="{{ url_for('search') }}" method="POST" class="col s12">
+      <div class="row valign-wrapper center-align">
+         <div class="input-field col s12 m8">
+            <i class="fas fa-search prefix light-blue-text text-darken-1"></i>
+            <input type="text" name="query" id="query" minlength="3" class="validate">
+            <label for="query">Search Sales</label>
+         </div>
+         <div class="col s12 m4">
+            <a href="{{ url_for('get_sales') }}" class="red btn text-shadow">Reset</a>
+            <button type="submit" class="light-blue darken-2 btn text-shadow ">
+            <i class="fas fa-search left"></i> Search
+            </button>
+         </div>
+      </div>
+   </form>
+</div>
 <!-- Sales Section -->
-
-    {% if sales|length > 0 %}
-
-    <ul class="collapsible popout">
-        {% for sale in sales %} 
-        <li>
-            <div class="collapsible-header white-text blue-grey darken-4 text-shadow">
-                <div class="col s3">
-                    <i class="fas fa-caret-down"></i>
-                    {% if session.user|lower == sale.created_by|lower  %}
-                        <a href="{{ url_for('delete_sale', sale_id=sale._id) }}" class="btn-small blue accent-2">Done</a>
-                        <a href="{{ url_for('edit_sale', sale_id=sale._id) }}" class="btn-small grey accent-2">Edit</a>
-                    {% endif %} 
-                </div>
-                <div class="col s9">
-                    
-                 
-              <strong>{{ sale.customer_name }}</strong>: {{ sale.close_date }}
-              {% if sale.purchase_approval == "Yes" %}
-                <i class="fas fa-exclamation-circle light-grey-text text-lighten-2 tooltipped"
-                 data-position="right" data-tooltip="Approval Needed!"> </i>    
-              {% endif %} 
-                </div>
-            </div>    
-            <div class="collapsible-body">
-                <strong>{{ sale.sale_amount }}</strong>
-                <p>{{ sale.sale_description }}</p>
-                <p><em>by: {{ sale.created_by }}</em></p>
-            </div>
-        </li>
-        {% endfor %} 
-    </ul>
-    <!-- Responsive Section -->
-    {% else %} 
-        <h3 class="red-text text-darken-4 center-align">No results found</h3>
-    {% endif %}
-{% endblock %}    
+{% if sales|length > 0 %}
+<ul class="collapsible popout">
+   {% for sale in sales %} 
+   <li>
+      <div class="collapsible-header white-text blue-grey darken-4 text-shadow">
+         <div class="col s3">
+            <i class="fas fa-caret-down"></i>
+            {% if session.user|lower == sale.created_by|lower  %}
+            <a href="{{ url_for('delete_sale', sale_id=sale._id) }}" class="btn-small blue accent-2">Done</a>
+            <a href="{{ url_for('edit_sale', sale_id=sale._id) }}" class="btn-small grey accent-2">Edit</a>
+            {% endif %} 
+         </div>
+         <div class="col s9">
+            <strong>{{ sale.customer_name }}</strong>: {{ sale.close_date }}
+            {% if sale.purchase_approval == "Yes" %}
+            <i class="fas fa-exclamation-circle light-grey-text text-lighten-2 tooltipped"
+               data-position="right" data-tooltip="Approval Needed!"> </i>    
+            {% endif %} 
+         </div>
+      </div>
+      <div class="collapsible-body">
+         <strong>{{ sale.sale_amount }}</strong>
+         <p>{{ sale.sale_description }}</p>
+         <p><em>by: {{ sale.created_by }}</em></p>
+      </div>
+   </li>
+   {% endfor %} 
+</ul>
+<!-- Responsive Section -->
+{% else %} 
+<h3 class="red-text text-darken-4 center-align">No results found</h3>
+{% endif %}
+{% endblock %}

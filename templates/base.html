@@ -1,88 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" 
-        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
-    {% block styles %}
-    {% endblock %} 
-    <title>Predict Your Sales</title>
-</head>
-<body>
-    <header>
-        <!-- Top navbar-->
-        <nav class="nav-extended navbar text-shadow blue-grey darken-4">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" 
+         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" type="text/css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css">
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
+      {% block styles %}
+      {% endblock %} 
+      <title>Predict Your Sales</title>
+   </head>
+   <body>
+      <header>
+         <!-- Top navbar-->
+         <nav class="nav-extended navbar text-shadow blue-grey darken-4">
             <div class="nav-wrapper">
-                <a href="{{ url_for('get_sales') }}" class="brand-logo text-wrapped">Predict Sales  </a>
-                <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="material-icons"><i class="fas fa-bars"></i></i></a>
-                <ul class="right hide-on-med-and-down">
-                    <li><a href="{{ url_for('get_sales') }}">Home</a></li>
-                    {% if session.user %}
-                        <li><a href="{{ url_for('dashboard', username=session['user']) }}">  Dashboard</a></li>
-                        <li><a href="{{ url_for('new_sales') }}">New Sales</a></li>
-                        {% if session.user|lower == "admin"|lower %} 
-                        <li><a href="{{ url_for('get_users') }}">Manage Users</a></li> 
-                        {% endif %}                       
-                        <li><a href="{{ url_for('logout') }}">Log Out</a></li>
-                    {% else %} 
-                        <li><a href="{{ url_for('login') }}">Log In</a></li>
-                        <li><a href="{{ url_for('register') }}">Register</a></li>
-                    {% endif %} 
-                </ul>
+               <a href="{{ url_for('get_sales') }}" class="brand-logo text-wrapped">Predict Sales  </a>
+               <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="material-icons"><i class="fas fa-bars"></i></i></a>
+               <ul class="right hide-on-med-and-down">
+                  <li><a href="{{ url_for('get_sales') }}">Home</a></li>
+                  {% if session.user %}
+                  <li><a href="{{ url_for('dashboard', username=session['user']) }}">  Dashboard</a></li>
+                  <li><a href="{{ url_for('new_sales') }}">New Sales</a></li>
+                  {% if session.user|lower == "admin"|lower %} 
+                  <li><a href="{{ url_for('get_users') }}">Manage Users</a></li>
+                  {% endif %}                       
+                  <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+                  {% else %} 
+                  <li><a href="{{ url_for('login') }}">Log In</a></li>
+                  <li><a href="{{ url_for('register') }}">Register</a></li>
+                  {% endif %} 
+               </ul>
             </div>
-        </nav>
-        <!-- Mobile side navbar-->
-
-        <ul class="sidenav" id="mobile-demo">
-            <li><h4 class="center-align light-grey-text text-darken-4 mobile-title text-wrapped">Predict Sales</i>on</h4></li>
+         </nav>
+         <!-- Mobile side navbar-->
+         <ul class="sidenav" id="mobile-demo">
+            <li>
+               <h4 class="center-align light-grey-text text-darken-4 mobile-title text-wrapped">Predict Sales</i>on</h4>
+            </li>
             <li><a href="{{ url_for('get_sales') }}">Home</a></li>
             {% if session.user %}
             <li><a href="{{ url_for('dashboard', username=session['user']) }}">Sales Dashboard</a></li>
             <li><a href="{{ url_for('new_sales') }}">New Sales</a></li>
-                {% if session.user|lower == "admin"|lower %} 
-                    <li><a href="{{ url_for('get_users') }}">Manage Users</a></li> 
-                {% endif %}
+            {% if session.user|lower == "admin"|lower %} 
+            <li><a href="{{ url_for('get_users') }}">Manage Users</a></li>
+            {% endif %}
             <li><a href="{{ url_for('logout') }}">Log Out</a></li>
             {% else %} 
             <li><a href="{{ url_for('login') }}">Log In</a></li>
             <li><a href="{{ url_for('register') }}">Register</a></li>
             {% endif %} 
-        </ul>
-    </header>
-
-    <section>
-        <!-- flash messages-->
-        {% with messages = get_flashed_messages() %} 
-            {% if messages %} 
-                {% for message in messages %} 
-                    <div class="row flashes">
-                        <h4 class="blue-grey darken-4 center-align">{{ message }}</h4>
-                    </div>
-                {% endfor %}
-            {% endif %} 
-        {% endwith %} 
-    </section>
-     
-    <main class="container main-body">
-    {% block content %} 
-    {% endblock %} 
-    </main>
-        <!-- footer messages-->
-    <footer class="page-footer footer-copyright grey darken-4 center-align">
+         </ul>
+      </header>
+      <section>
+         <!-- flash messages-->
+         {% with messages = get_flashed_messages() %} 
+         {% if messages %} 
+         {% for message in messages %} 
+         <div class="row flashes">
+            <h4 class="blue-grey darken-4 center-align">{{ message }}</h4>
+         </div>
+         {% endfor %}
+         {% endif %} 
+         {% endwith %} 
+      </section>
+      <main class="container main-body">
+         {% block content %} 
+         {% endblock %} 
+      </main>
+      <!-- footer messages-->
+      <footer class="page-footer footer-copyright grey darken-4 center-align">
          <div class="container">
             © Made for Educational Purposes by Vincent Brown @2022
-            </div>
-    </footer>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-    {% block scripts %} 
-    {% endblock %} 
-</body>
+         </div>
+      </footer>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
+         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+      {% block scripts %} 
+      {% endblock %} 
+   </body>
 </html>
